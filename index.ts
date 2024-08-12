@@ -5,7 +5,7 @@ import './style.css';
 //单词定义，叹号-非空断言
 const form: HTMLFormElement = document.querySelector('#defineform')!;
 const resultContainer: HTMLElement = document.querySelector('.lead')!;
-
+const definitionHeading: HTMLElement = document.querySelector('h1')!;
 
 //onsubmit - 事件监听 - 当用户提交的时候
 //async - 被标记，因为它将发出异步网络请求
@@ -18,8 +18,11 @@ form.onsubmit = async (event) => {
   const word = formData.get('defineword') as string;
   if (!word) {
     resultContainer.innerHTML = '<p>Please enter a word.</p>';
+    definitionHeading.textContent = "Definition";
     return;
   }
+
+  definitionHeading.textContent = word;
   //获取api的返回结果，await：等待fetch完成再执行代码
   //const response = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}');
   //const response = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/${word}');
